@@ -5,12 +5,14 @@ TODO
 
 HolidayDb lookup
 ----------------
+* handle passing in the name of a local JSON data file
 * handle passing in a URL e.g. https://www.google.com/calendar/ical/en.uk%23holiday%40group.v.calendar.google.com/public/basic.ics
 * parse calendar feed: http://nodetoolbox.com/packages/ical OR Atom https://www.npmjs.org/browse/keyword/atom
 * local lazy cache to avoid hitting the feed each time
 
 Web interface
 -------------
+* Hook up the HolidayDb backend
 * [DONE] Define develop grunt task
 * [DONE] Add test for response handler
 * [DONE] Implement the most basic http server frontend with ?answer=(yes|no) override

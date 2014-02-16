@@ -5,13 +5,14 @@ Is today a holiday, and if so, which one?
 ## Getting Started
 Install the module with: `npm install isitholiday`
 
-```javascript
-var isitholiday = require('isitholiday');
-isitholiday.awesome(); // "awesome"
-```
+Start the default server with: `npm start`
 
 ## Documentation
-_(Coming soon)_
+A minimalistic webapp (for a "single serving website" as they are sometimes called) that figures out whether or not today is a registered/public holiday, and delivers a response in large, friendly letters. Useful in the morning when you need to quickly decide should you get dressed and go to work/class or stay at home and wear nothing but a towel.
+
+The calendar information on the backend is either based on static data (a JSON dump) or derived from a public Google Calendar. 
+
+In the latter case, the calendar feed will get converted from iCal format and subsequently persisted locally.
 
 ## Examples
 _(Coming soon)_
