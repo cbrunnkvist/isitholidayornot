@@ -11,7 +11,7 @@ HolidayDb lookup
 
 Web interface
 -------------
-* Implement the most basic http server frontend with ?answer=(yes|no) override
+* [DONE] Implement the most basic http server frontend with ?answer=(yes|no) override
 * Ask Bower to pull in HTML components e.g. Bootstrap
 
 Deployment
