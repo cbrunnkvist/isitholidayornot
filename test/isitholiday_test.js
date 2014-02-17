@@ -2,7 +2,7 @@
 
 var isitholiday = require('../lib/isitholiday.js');
 
-exports['initialize'] = {
+exports['constructor'] = {
   setUp: function(done) {
     function nextDayAsTimestamp(d) {
       return new Date(d.getTime() + 86400 * 1000);
@@ -31,42 +31,51 @@ exports['initialize'] = {
 
     test.done();
   },
-  'constructor variants': {
-    'should accept an array of event objects': function(test) {
-      var tmpHolidayDb;
-      test.doesNotThrow(function() {
-        tmpHolidayDb = isitholiday.initialize([]);
-      }, Error, 'initialize should raise if args missing');
-
-      test.doesNotThrow(function() {
-        tmpHolidayDb.lookup(new Date());
-      }, Error, 'lookup should be available');
-      test.done();
-    },
-    // 'should accept a local JSON file as data source': function(test) {
-    // },
-  },
-
-  'lookup': {
+  'variants': {
     setUp: function(done) {
-      this.holidayDb = isitholiday.initialize(this.fixtures.sampleArray);
-      done();
-    },
-    'should require a valid date': {
-      'return event data for known holiday': function(test) {
-        var result = this.holidayDb.lookup(this.KNOWN_HOLIDAY);
+      this.testInitializationAndLookup = function(test, testSource, testDate) {
+        var tmpHolidayDb;
+        test.doesNotThrow(function() {
+          tmpHolidayDb = isitholiday.initialize(testSource);
+        }, Error, 'initialize should raise if args missing');
+
+        test.doesNotThrow(function() {
+          tmpHolidayDb.lookup(testDate);
+        }, Error, 'lookup should be available');
+        return tmpHolidayDb;
+      };
+      this.testLookupKnownHoliday = function(test, testSource, testDate) {
+        var holidayDb = this.testInitializationAndLookup(test, testSource, testDate);
+        var result = holidayDb.lookup(this.KNOWN_HOLIDAY);
         test.ok(result.summary);
         test.ok(result.start.dateTime);
         test.ok(result.end.dateTime);
+      };
+      this.testLookupAnythingElse = function(test, testSource, testDate) {
+        var holidayDb = this.testInitializationAndLookup(test, testSource, testDate);
+        test.equal(holidayDb.lookup(), false);
+        test.equal(holidayDb.lookup(''), false);
+        test.equal(holidayDb.lookup(42), false);
+        test.equal(holidayDb.lookup(this.NO_HOLIDAY), false);
+      };
+      done();
+    },
+
+    'should support an array of event objects': {
+      'return event data for known holiday': function(test) {
+        this.testLookupKnownHoliday(test, this.fixtures.sampleArray, new Date());
         test.done();
       },
       'return false for anything else': function(test) {
-        test.equal(this.holidayDb.lookup(), false);
-        test.equal(this.holidayDb.lookup(''), false);
-        test.equal(this.holidayDb.lookup(42), false);
-        test.equal(this.holidayDb.lookup(this.NO_HOLIDAY), false);
+        this.testLookupAnythingElse(test, this.fixtures.sampleArray, new Date());
         test.done();
       },
     },
+    // },
+    // 'should accept a local JSON file as data source': function(test) {
+    //   test.done();
+    // },
+
   },
+
 };
