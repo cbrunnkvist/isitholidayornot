@@ -1,68 +1,72 @@
 'use strict';
 
-
-/*
-  ======== A Handy Little Nodeunit Reference ========
-  https://github.com/caolan/nodeunit
-
-  Test methods:
-    test.expect(numAssertions)
-    test.done()
-  Test assertions:
-    test.ok(value, [message])
-    test.equal(actual, expected, [message])
-    test.notEqual(actual, expected, [message])
-    test.deepEqual(actual, expected, [message])
-    test.notDeepEqual(actual, expected, [message])
-    test.strictEqual(actual, expected, [message])
-    test.notStrictEqual(actual, expected, [message])
-    test.throws(block, [error], [message])
-    test.doesNotThrow(block, [error], [message])
-    test.ifError(value)
-*/
 var isitholiday = require('../lib/isitholiday.js');
 
 exports['initialize'] = {
+  setUp: function(done) {
+    function nextDayAsTimestamp(d) {
+      return new Date(d.getTime() + 86400 * 1000);
+    }
+    this.NO_HOLIDAY = new Date('2011-11-11');
+    this.KNOWN_HOLIDAY = nextDayAsTimestamp(this.NO_HOLIDAY);
+    var exampleCalendar = [{
+      "summary": "Some event",
+      "start": {
+        "dateTime": this.KNOWN_HOLIDAY
+      },
+      "end": {
+        "dateTime": nextDayAsTimestamp(this.KNOWN_HOLIDAY)
+      }
+    }];
+    this.fixtures = {
+      'sampleArray': exampleCalendar,
+      'sampleJSONFile': 'test/data/1.json',
+    };
+    done();
+  },
   'should require data source on the constructor': function(test) {
     test.throws(function() {
       isitholiday.initialize();
     }, Error, 'initialize should raise if args missing');
 
-    var tmpHolidayDb = isitholiday.initialize([]);
-    test.ok('function' === typeof tmpHolidayDb.lookup);
     test.done();
   },
-};
+  'constructor variants': {
+    'should accept an array of event objects': function(test) {
+      var tmpHolidayDb;
+      test.doesNotThrow(function() {
+        tmpHolidayDb = isitholiday.initialize([]);
+      }, Error, 'initialize should raise if args missing');
 
-exports['lookup'] = {
-  setUp: function(done) {
-    this.noHoliday = new Date('2011-11-11');
-    this.knownHoliday = new Date(this.noHoliday.getTime() + 86400 * 1000);
-    this.exampleCalendar = [{
-      "summary": "Some event",
-      "start": {
-        "dateTime": this.knownHoliday
-      },
-      "end": {
-        "dateTime": new Date(this.knownHoliday.getTime() + 86400 * 1000)
-      }
-    }];
-    this.holidayDb = isitholiday.initialize(this.exampleCalendar);
-    done();
-  },
-  'should require a valid date': {
-    'return event data for known holiday': function(test) {
-      var result = this.holidayDb.lookup(this.knownHoliday);
-      test.ok(result.summary);
-      test.ok(result.start.dateTime);
-      test.ok(result.end.dateTime);
+      test.doesNotThrow(function() {
+        tmpHolidayDb.lookup(new Date());
+      }, Error, 'lookup should be available');
       test.done();
     },
-    'return false for anything else': function(test) {
-      test.equal(this.holidayDb.lookup(), false);
-      test.equal(this.holidayDb.lookup(''), false);
-      test.equal(this.holidayDb.lookup(42), false);
-      test.done();
+    // 'should accept a local JSON file as data source': function(test) {
+    // },
+  },
+
+  'lookup': {
+    setUp: function(done) {
+      this.holidayDb = isitholiday.initialize(this.fixtures.sampleArray);
+      done();
+    },
+    'should require a valid date': {
+      'return event data for known holiday': function(test) {
+        var result = this.holidayDb.lookup(this.KNOWN_HOLIDAY);
+        test.ok(result.summary);
+        test.ok(result.start.dateTime);
+        test.ok(result.end.dateTime);
+        test.done();
+      },
+      'return false for anything else': function(test) {
+        test.equal(this.holidayDb.lookup(), false);
+        test.equal(this.holidayDb.lookup(''), false);
+        test.equal(this.holidayDb.lookup(42), false);
+        test.equal(this.holidayDb.lookup(this.NO_HOLIDAY), false);
+        test.done();
+      },
     },
   },
 };
