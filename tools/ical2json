@@ -1,0 +1,28 @@
+#!/usr/bin/env node
+ // hack-
+var ical = require('ical'),
+  months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  outData = {};
+
+try {
+  var data = ical.parseFile(process.argv[2]);
+} catch (e) {
+  console.error('Error:', e.message);
+}
+
+for (var k in data) {
+  if (data.hasOwnProperty(k)) {
+    var ev = data[k];
+    if ('VEVENT' === ev.type) {
+      outData[k] = ev;
+      console.warn("Event",
+        ev.summary,
+        'on the', ev.start.getDate(), 'of', months[ev.start.getMonth()]);
+      if (((ev.end - ev.start) / 1000) > 86400) {
+        console.warn('  until the', ev.end.getDate(), 'of', months[ev.end.getMonth()],
+          '(' + ((ev.end - ev.start) / 1000 / 86400) + ' days)');
+      }
+    }
+  }
+}
+console.info(JSON.stringify(outData, false, 2));
