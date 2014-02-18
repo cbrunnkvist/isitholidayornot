@@ -32,18 +32,28 @@ module.exports = function(grunt) {
         files: '<%= jshint.test.src %>',
         tasks: ['jshint:test', 'nodeunit']
       },
+      develop: {
+        files: ['lib/**/*.js'],
+        tasks: ['develop:server'],
+        options: {
+          spawn: false
+        }
+      },
+    },
+    develop:{
+      server: {
+        file: 'app.js',
+      }
     },
   });
 
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-develop');
 
-  grunt.registerTask('default', ['jshint', 'nodeunit']);
-
-  grunt.registerTask('server', function(){
-    grunt.log.writeln('Started web server...');
-    require('./app.js');
-  });
+  grunt.registerTask('default',['test']);
+  grunt.registerTask('test', ['jshint', 'nodeunit']);
+  grunt.registerTask('devserver', ['test','develop', 'watch']);
 
 };
