@@ -15,8 +15,9 @@ Web interface
 * Hook up the HolidayDb backend
 * [DONE] ~~Define develop grunt task~~
 * [DONE] ~~Add test for response handler~~
-* [DONE] ~~Implement the most basic http server frontend with ?answer=(yes|no) override
-* Ask Bower to pull in HTML components e.g. Bootstrap~~
+* [DONE] ~~Implement the most basic http server frontend with ?answer=(yes|no) override~~
+* Ask Bower to pull in HTML components e.g. Bootstrap
+* Incorporate real actual HTML instead of placeholder text
 
 Deployment
 ----------
