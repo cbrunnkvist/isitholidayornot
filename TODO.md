@@ -7,7 +7,7 @@ HolidayDb lookup
 ----------------
 * [DONE] handle passing in the name of a local JSON data file
 * handle passing in a URL e.g. https://www.google.com/calendar/ical/r39e76lluhfp7t5pmp8bacsqco%40group.calendar.google.com/public/basic.ics
-* parse calendar feed: http://nodetoolbox.com/packages/ical OR Atom https://www.npmjs.org/browse/keyword/atom
+* [DONE] parse calendar feed: http://nodetoolbox.com/packages/ical OR Atom https://www.npmjs.org/browse/keyword/atom
 * local lazy cache to avoid hitting the feed each time
 
 Web interface
