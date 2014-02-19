@@ -1,6 +1,6 @@
 'use strict';
 
-var isitholidayResponseController = require('../lib/web/response-controller.js');
+var isitholidayResponseController = require('../lib/web/isitholidayResponseController.js');
 
 exports['override'] = {
   setUp: function(done) {
