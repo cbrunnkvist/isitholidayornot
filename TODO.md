@@ -12,6 +12,7 @@ HolidayDb lookup
 
 Web interface
 -------------
+* Use some compileable style language e.g. Sass
 * [skip] ~~Add routing for serving static assets~~ Use inlining of styles and scripts instead
 * Hook up the HolidayDb backend
 * [DONE] ~~Define develop grunt task~~
