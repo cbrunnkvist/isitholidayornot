@@ -29,18 +29,18 @@ module.exports = function(grunt) {
         tasks: ['jshint:lib', 'nodeunit']
       },
       test: {
-        files: '<%= jshint.test.src %>',
+        files: ['test/**/*.js', 'webroot/**/*.html'],
         tasks: ['jshint:test', 'nodeunit']
       },
       develop: {
-        files: ['lib/**/*.js'],
+        files: '<%= jshint.lib.src %>',
         tasks: ['develop:server'],
         options: {
           spawn: false
         }
       },
     },
-    develop:{
+    develop: {
       server: {
         file: 'app.js',
       }
@@ -52,8 +52,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-develop');
 
-  grunt.registerTask('default',['test']);
+  grunt.registerTask('default', ['test']);
   grunt.registerTask('test', ['jshint', 'nodeunit']);
-  grunt.registerTask('devserver', ['test','develop', 'watch']);
+  grunt.registerTask('devserver', ['test', 'develop', 'watch']);
 
 };
