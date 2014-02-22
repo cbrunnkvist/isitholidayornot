@@ -28,16 +28,22 @@ exports['convert ical files to JSON'] = {
   'should only include VEVENT objects': function(test) {
     var data = JSON.parse(fs.readFileSync(this.outFilename));
 
-    var nonEventObjects = [];
+    var calendarObjects = {
+      events: [],
+      other: []
+    };
     for (var k in data) {
       if (data.hasOwnProperty(k)) {
         var calendarObject = data[k];
         if ('VEVENT' !== calendarObject.type) {
-          nonEventObjects.push(calendarObject);
+          calendarObjects.other.push(calendarObject);
+        } else {
+          calendarObjects.events.push(calendarObject);
         }
       }
     }
-    test.equal(nonEventObjects.length, 0, 'other objects found');
+    test.ok(0 === calendarObjects.other.length, 'other objects found');
+    test.ok(0 < calendarObjects.events.length, 'no event objects found');
 
     test.done();
   }

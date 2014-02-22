@@ -43,7 +43,7 @@ exports['constructor'] = {
         }, Error, 'lookup should be available with ' + sourceVariant);
         return tmpHolidayDb;
       };
-      this.testLookupKnownHoliday = function(test, testSource, testDate) {
+      this.assertFindsKnownHoliday = function(test, testSource, testDate) {
         var holidayDb = this.testInitializationAndLookup(test, testSource, testDate);
         var result = holidayDb.lookup(testDate);
         test.notEqual(result, false);
@@ -51,7 +51,7 @@ exports['constructor'] = {
         test.ok(result.start);
         test.ok(result.end);
       };
-      this.testLookupAnythingElse = function(test, testSource) {
+      this.assertCanLookupAnythingElse = function(test, testSource) {
         var holidayDb = this.testInitializationAndLookup(test, testSource, new Date());
         test.equal(holidayDb.lookup(), false);
         test.equal(holidayDb.lookup(''), false);
@@ -63,21 +63,17 @@ exports['constructor'] = {
 
     'should support an array of event objects': {
       'return event data for known holiday': function(test) {
-        this.testLookupKnownHoliday(test, this.fixtures.sampleArray, this.KNOWN_HOLIDAY);
+        this.assertFindsKnownHoliday(test, this.fixtures.sampleArray, this.KNOWN_HOLIDAY);
         test.done();
       },
       'return false for anything else': function(test) {
-        this.testLookupAnythingElse(test, this.fixtures.sampleArray);
+        this.assertCanLookupAnythingElse(test, this.fixtures.sampleArray);
         test.done();
       },
     },
     'should accept a local JSON file as data source': {
       'return event data for known holiday': function(test) {
-        this.testLookupKnownHoliday(test, this.fixtures.sampleJSONFile, this.KNOWN_HOLIDAY);
-        test.done();
-      },
-      'return false for anything else': function(test) {
-        this.testLookupAnythingElse(test, this.fixtures.sampleJSONFile);
+        this.assertFindsKnownHoliday(test, this.fixtures.sampleJSONFile, this.KNOWN_HOLIDAY);
         test.done();
       },
     },
