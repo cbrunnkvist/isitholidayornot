@@ -9,12 +9,12 @@ exports['override'] = {
   },
   'with yes': function(test) {
     this.responseBody = isitholidayResponseController('http://localhost/?answer=yes');
-    test.ok(this.responseBody.match(/data-answer="true"/i), 'should use data attribute true for "yes"');
+    test.ok(this.responseBody.match(/class=.*holiday-true/i), 'should apply CSS class holiday-true for "yes"');
     test.done();
   },
   'with no': function(test) {
     this.responseBody = isitholidayResponseController('http://localhost/?answer=no');
-    test.ok(this.responseBody.match(/data-answer="false"/i), 'should use data attribute false for "no"');
+    test.ok(this.responseBody.match(/class=.*holiday-false/i), 'should apply CSS class holiday-false for "no"');
     test.done();
   },
 };
