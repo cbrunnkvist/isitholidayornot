@@ -3,121 +3,107 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="description" content="">
-  <meta name="author" content="">
-  <link rel="shortcut icon" href="/assets/ico/favicon.ico">
+  <meta name="author" content="Conny Brunnkvist">
 
   <title>Cambodian Public Holidays</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
   <link href='http://fonts.googleapis.com/css?family=Merienda+One' rel='stylesheet' type='text/css'>
   <style>
-/*
- * Globals
- */
-
- /* Links */
- a,
- a:focus,
- a:hover {
-  color: #fff;
-}
-
-/*
- * Base structure
- */
-
- html,
- body {
-  height: 100%;
-  background-color: rgba(255, 203, 92, 1);
-}
-body {
-  color: #fff;
-  text-align: center;
-  /*text-shadow: 0 1px 3px rgba(0,0,0,.5);*/
-  box-shadow: inset 0 0 142px rgba(0,0,0,.3);
-}
-
-
-.holiday-true {
- background-color: rgba(60, 120, 230, 1);
- color: rgba(255, 203, 92, 1);
-}
-.holiday-false{
- background-color: rgba(255, 203, 92, 1);
- color: rgba(60, 120, 230, 1);
-}
-/* Extra markup and styles for table-esque vertical and horizontal centering */
-.site-wrapper {
-  display: table;
-  width: 100%;
-  height: 100%; /* For at least Firefox */
-  min-height: 100%;
-}
-.site-wrapper-inner {
-  display: table-cell;
-  vertical-align: top;
-}
-.cover-container {
-  margin-right: auto;
-  margin-left: auto;
-}
-
-/* Padding for spacing */
-@media (min-height: 300px) {
-  .inner {
-    padding: 30px;
+  html,
+  body {
+    height: 100%;
   }
-}
+  body {
+    text-align: center;
+    box-shadow: inset 0 0 112px rgba(0,0,0,.3);
+  }
 
-/*
- * Header
- */
+  .disable-rubberbanding-html {
+    margin:0;
+    padding:0;
+    overflow: hidden;
+  }
+  .disable-rubberbanding-body {
+    position: absolute;
+    width:100%;
+    height:100%;
+    overflow: auto;
+  }
+  .holiday-true {
+    background-color: rgba(60, 120, 230, 1);
+    color: rgba(255, 203, 92, 1);
+  }
+  .holiday-false{
+   background-color: rgba(255, 203, 92, 1);
+   color: rgba(60, 120, 230, 1);
+  }
+  /* Extra markup and styles for table-esque vertical and horizontal centering */
+  .site-wrapper {
+    display: table;
+    width: 100%;
+    height: 100%; /* For at least Firefox */
+    min-height: 100%;
+  }
+  .site-wrapper-inner {
+    display: table-cell;
+    vertical-align: top;
+  }
+  .cover-container {
+    margin-right: auto;
+    margin-left: auto;
+  }
+  /* Padding for spacing */
+  @media (min-height: 300px) {
+    .inner {
+      padding: 30px;
+    }
+  }
 
- .masthead {
-  position: fixed;
-  top: 60px;
-}
+  /*
+    Header
+   */
+  .masthead {
+    position: fixed;
+    top: 60px;
+  }
 
-/*
- * Cover
- */
+  /*
+    Cover
+  */
+  .heading-true {
+    border-bottom: rgba(255, 203, 92, 1) 1px dotted;
+  }
+  .heading-false {
+    border-bottom: rgba(60, 120, 230, 1) 1px dotted;
+  }
+  .cover-heading {
+    font-family: 'Merienda One', cursive;
+    font-size: 100px;
+  }
 
-.heading-true {
-  border-bottom: rgba(255, 203, 92, 1) 1px dotted;
-}
-.heading-false {
-  border-bottom: rgba(60, 120, 230, 1) 1px dotted;
-}
+  /*
+    Footer
+  */
+  .mastfoot {
+    color: #999; /* IE8 proofing */
+    color: rgba(55,55,55,.5);
+    bottom: 0;
+  }
 
-.cover-heading {
-  font-family: 'Merienda One', cursive;
-  font-size: 100px;
-}
-
-/*
- * Footer
- */
-
- .mastfoot {
-  color: #999; /* IE8 proofing */
-  color: rgba(55,55,55,.5);
-  bottom: 0;
-}
-
-
-/*
- * Affix and center
- */
-
+  /*
+    Affix and center
+  */
   @media (min-width: 420px) {
-.heading {
-  margin: 0 23%;
-  text-align: left;
-}
+    .heading {
+      margin: 0 23%;
+      text-align: left;
+    }
   }
   /* Pull out the header and footer */
   .masthead {
@@ -138,57 +124,61 @@ body {
   .cover-container {
     width: 100%; 
   }
-
   @media (min-width: 992px) {
-  .masthead,
-  .mastfoot,
-  .cover-container {
-    width: 990px;
+    .masthead,
+    .mastfoot,
+    .cover-container {
+      width: 990px;
     }
   }
-
   </style>
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-      <![endif]-->
-    </head>
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  </head>
 
-    <body class="holiday-<%= answer %>">
-
-      <div class="site-wrapper">
-
-        <div class="site-wrapper-inner">
-
-          <div class="cover-container">
-
-            <div class="masthead">
-              <div class="inner">
+  <body class="holiday-<%= answer %>">
+    <div class="site-wrapper">
+      <div class="site-wrapper-inner">
+        <div class="cover-container">
+          <div class="masthead">
+            <div class="inner">
               <p class="heading heading-<%= answer %>">Is It Holiday In Cambodia?</p>
-              </div>
             </div>
-            <div class="inner cover">
-              <h1 class="cover-heading" data-answer="<%= answer %>"><%= answer ? 'Yes!' : 'No.' %></h1>
-            </div>
-
-            <div class="mastfoot">
-              <div class="inner">
-                <p>&copy; 2013 turquoise tokay&trade; · handmade in phnom&nbsp;penh</p>
-              </div>
-            </div>
-
+          </div>
+          <div class="inner cover">
+            <h1 class="cover-heading" data-answer="<%= answer %>"><%= answer ? 'Yes!' : 'No.' %></h1>
           </div>
 
+          <div class="mastfoot">
+            <div class="inner">
+              <p>&copy; 2013 turquoise tokay&trade; · handmade in phnom&nbsp;penh</p>
+            </div>
+          </div>
         </div>
-
       </div>
+    </div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
+  <script>
+    document.body.addEventListener('touchmove', function(event) {
+        event.preventDefault();
+    }, false);
+ 
+    window.onresize = function() {
+      $(document.body).width(window.innerWidth).height(window.innerHeight);
+    }
+ 
+    $(function() {
+      window.onresize();
+    });
+  </script>
   </body>
   </html>
