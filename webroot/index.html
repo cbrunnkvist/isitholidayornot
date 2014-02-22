@@ -12,6 +12,7 @@
 
   <!-- Bootstrap core CSS -->
   <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href='http://fonts.googleapis.com/css?family=Merienda+One' rel='stylesheet' type='text/css'>
   <style>
 /*
  * Globals
@@ -24,17 +25,6 @@
   color: #fff;
 }
 
-/* Custom default button */
-.btn-default,
-.btn-default:hover,
-.btn-default:focus {
-  color: #333;
-  text-shadow: none; /* Prevent inheritence from `body` */
-  background-color: #fff;
-  border: 1px solid #fff;
-}
-
-
 /*
  * Base structure
  */
@@ -42,15 +32,24 @@
  html,
  body {
   height: 100%;
-  background-color: #333;
+  background-color: rgba(255, 203, 92, 1);
 }
 body {
   color: #fff;
   text-align: center;
-  text-shadow: 0 1px 3px rgba(0,0,0,.5);
-  box-shadow: inset 0 0 100px rgba(0,0,0,.5);
+  /*text-shadow: 0 1px 3px rgba(0,0,0,.5);*/
+  box-shadow: inset 0 0 142px rgba(0,0,0,.3);
 }
 
+
+.holiday-true {
+ background-color: rgba(60, 120, 230, 1);
+ color: rgba(255, 203, 92, 1);
+}
+.holiday-false{
+ background-color: rgba(255, 203, 92, 1);
+ color: rgba(60, 120, 230, 1);
+}
 /* Extra markup and styles for table-esque vertical and horizontal centering */
 .site-wrapper {
   display: table;
@@ -68,68 +67,36 @@ body {
 }
 
 /* Padding for spacing */
-.inner {
-  padding: 30px;
+@media (min-height: 300px) {
+  .inner {
+    padding: 30px;
+  }
 }
-
 
 /*
  * Header
  */
- .masthead-brand {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
 
-.masthead-nav > li {
-  display: inline-block;
+ .masthead {
+  position: fixed;
+  top: 60px;
 }
-.masthead-nav > li + li {
-  margin-left: 20px;
-}
-.masthead-nav > li > a {
-  padding-right: 0;
-  padding-left: 0;
-  font-size: 16px;
-  font-weight: bold;
-  color: #fff; /* IE8 proofing */
-  color: rgba(255,255,255,.75);
-  border-bottom: 2px solid transparent;
-}
-.masthead-nav > li > a:hover,
-.masthead-nav > li > a:focus {
-  background-color: transparent;
-  border-bottom-color: rgba(255,255,255,.25);
-}
-.masthead-nav > .active > a,
-.masthead-nav > .active > a:hover,
-.masthead-nav > .active > a:focus {
-  color: #fff;
-  border-bottom-color: #fff;
-}
-
-@media (min-width: 768px) {
-  .masthead-brand {
-    float: left;
-  }
-  .masthead-nav {
-    float: right;
-  }
-}
-
 
 /*
  * Cover
  */
 
- .cover {
-  padding: 0 20px;
+.heading-true {
+  border-bottom: rgba(255, 203, 92, 1) 1px dotted;
 }
-.cover .btn-lg {
-  padding: 10px 20px;
-  font-weight: bold;
+.heading-false {
+  border-bottom: rgba(60, 120, 230, 1) 1px dotted;
 }
 
+.cover-heading {
+  font-family: 'Merienda One', cursive;
+  font-size: 100px;
+}
 
 /*
  * Footer
@@ -137,7 +104,8 @@ body {
 
  .mastfoot {
   color: #999; /* IE8 proofing */
-  color: rgba(255,255,255,.5);
+  color: rgba(55,55,55,.5);
+  bottom: 0;
 }
 
 
@@ -145,7 +113,12 @@ body {
  * Affix and center
  */
 
- @media (min-width: 768px) {
+  @media (min-width: 420px) {
+.heading {
+  margin: 0 23%;
+  text-align: left;
+}
+  }
   /* Pull out the header and footer */
   .masthead {
     position: fixed;
@@ -153,7 +126,6 @@ body {
   }
   .mastfoot {
     position: fixed;
-    bottom: 0;
   }
   /* Start the vertical centering */
   .site-wrapper-inner {
@@ -162,27 +134,21 @@ body {
   /* Handle the widths */
   .masthead,
   .mastfoot,
+  /* Must be percentage or pixels for horizontal alignment */
   .cover-container {
-    width: 100%; /* Must be percentage or pixels for horizontal alignment */
+    width: 100%; 
   }
-}
 
-@media (min-width: 992px) {
+  @media (min-width: 992px) {
   .masthead,
   .mastfoot,
   .cover-container {
-    width: 700px;
+    width: 990px;
+    }
   }
-}
 
-</style>
-<!-- Custom styles for this template -->
-<link href="cover.css" rel="stylesheet">
-
-<!-- Just for debugging purposes. Don't actually copy this line! -->
-<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  </style>
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -197,17 +163,18 @@ body {
 
           <div class="cover-container">
 
+            <div class="masthead">
+              <div class="inner">
+              <p class="heading heading-<%= answer %>">Is It Holiday In Cambodia?</p>
+              </div>
+            </div>
             <div class="inner cover">
-              <p class="heading">Is It Holiday In Cambodia?</p>
               <h1 class="cover-heading" data-answer="<%= answer %>"><%= answer ? 'Yes!' : 'No.' %></h1>
-              <p class="lead">
-                <a href="#" class="btn btn-lg btn-default">Learn more</a>
-              </p>
             </div>
 
             <div class="mastfoot">
               <div class="inner">
-                <p> © 2013 turquoise tokay™ · handmade in phnom penh</p>
+                <p>&copy; 2013 turquoise tokay&trade; · handmade in phnom&nbsp;penh</p>
               </div>
             </div>
 
