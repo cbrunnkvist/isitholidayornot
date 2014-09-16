@@ -20,6 +20,8 @@ _(Coming soon)_
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
+[ ![Codeship Status for cbrunnkvist/isitholidayornot](https://codeship.io/projects/ecd7a080-1fbc-0132-77d3-1661476a7f64/status)](https://codeship.io/projects/35778)
+
 ## Release History
 _(Nothing yet)_
 
